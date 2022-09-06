@@ -9,8 +9,8 @@
         "RiZoeLXSpam",
         "SpamBots"
     ],
-    "repository": "https://t.me/TheRiZoeL",
-    "website": "https://t.me/TheRiZoeL",
+    "repository": "https://github.com/MrRizoel/deploy-spambot",
+    "website": "https://github.com/MrRizoel",
     "success_url": "https://t.me/TheRiZoeL",
     "env": {
              "API_ID": {
@@ -89,7 +89,7 @@
             "required": false
         },
       "OWNER_ID": {
-            "description": "owner Id",
+            "description": "single owner Id",
             "value": "",
             "required": true
         },
