@@ -1,0 +1,45 @@
+#!/bin/bash
+
+
+_repolink () {
+    local regex
+    regex='(https?)://github.com/.+/.+'
+    if [[ $SPAM_REPO == "Spambot" ]]
+    then
+        echo "aHR0cHM6Ly9naXRodWIuY29tL01yUml6b2VsL1NwYW1ib3QvYXJjaGl2ZS9SaXpvZWwuemlw" | base64 -d
+    elif [[ $SPAM_REPO == "Spambot" ]]
+    then
+        echo "aHR0cHM6Ly9naXRodWIuY29tL01yUml6b2VsL1NwYW1ib3QvYXJjaGl2ZS9SaXpvZWwuemlw" | base64 -d
+    elif [[ $SPAM_REPO =~ $regex ]]
+    then
+        if [[ $SPAM_REPO_BRANCH ]]
+        then
+            echo "${SPAM_REPO}/archive/${SPAM_REPO_BRANCH}.zip"
+        else
+            echo "${SPAM_REPO}/archive/Rizoel.zip"
+        fi
+    else
+        echo "aHR0cHM6Ly9naXRodWIuY29tL01yUml6b2VsL1NwYW1ib3QvYXJjaGl2ZS9SaXpvZWwuemlw" | base64 -d
+    fi
+}
+
+
+start_bot () {
+    local zippath
+    zippath="SpamBot.zip"
+    echo "  Downloading source code ..."
+    wget -q $(_repolink) -O "$zippath"
+    echo "  Unpacking Data ..."
+    HELLPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
+    unzip -qq "$zippath"
+    echo "  Processing Codes..."
+    rm -rf "$zippath"
+    sleep 5
+    cd $HELLPATH
+    echo "  • Starting RiZoeLXSpam •  "
+
+    python3 ../setup/updater.py ../requirements.txt requirements.txt
+    python3 -m RiZoeLXSpam
+}
+
+start_bot
